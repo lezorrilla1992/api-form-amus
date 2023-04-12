@@ -1,26 +1,29 @@
-const express = require("express");
-const mysql = require("mysql");
-const app = express();
+import express from 'express'
+const bodyParser = require("body-parser");
 const port = 3000;
+import { pool } from "./src/db";
 
-const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "amaus",
-});
+const app = express();
+app.use(bodyParser.json());
+
+
+
 
 connection.connect((err) => {
   if (err) throw err;
   console.log("Conectado a la BD Mysql");
 });
+//Route
+app.get('/ping', async (req, res) => {
+  const result = await pool.query('SELECT 1 + 1 AS result');
+  res.json(result)
+})
+app.get('/form', (req, res) => res.send('Obteniendo fom'))
+app.post('/form', (req, res) => res.send('Obteniendo fom'))
+app.put('/form', (req, res) => res.send('Obteniendo fom'))
+app.delete('/form', (req, res) => res.send('Obteniendo fom'))
 
-app.get('/',(req, res)=>{
-    connection.query('SELECT * FROM tabla',(error, results, fields)=>{
-        if(err) throw error;
-        res.send(results);
-    });
-});
+
 app.listen(port,() =>{
     console.log(`Servidor corriendo en http://localhost:${port}`);
 });
