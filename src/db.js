@@ -1,7 +1,7 @@
-import { createPool } from "mysql";
-const mysql = require("mysql");
+import { createPool } from "mysql2/promise";
 
- export const pool = mysql.createPool({
+
+ export const pool = createPool({
     host: "localhost",
     user: "root",
     password: "",
