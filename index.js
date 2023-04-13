@@ -6,7 +6,7 @@ import formRoutes from "./src/routes/form.routes.js";
 
 const app = express();
 
-
+app.use(express.json()) 
 
 app.use(indexRoutes)
 app.use(formRoutes)
