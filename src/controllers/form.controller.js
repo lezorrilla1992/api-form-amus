@@ -5,7 +5,7 @@
  }
  export const createForm = async (req, res) => {
     const {firstName} = req.body
-    const [rows] = await pool.query('INSERT INTO amaus(firstName) VALUES (?)', [firstName])
+    const [rows] = await pool.query('INSERT INTO amaus VALUES (?)', [firstName])
     res.send({rows})
     console.log(req.body)
  }
